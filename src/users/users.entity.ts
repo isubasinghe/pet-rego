@@ -9,6 +9,9 @@ export class User {
   @Column()
   name: string;
 
+  @Column()
+  email: string;
+
   @OneToMany(
     type => Pet,
     pet => pet.user,
