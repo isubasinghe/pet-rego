@@ -4,13 +4,21 @@ import { validate } from 'class-validator';
 import { Repository, getRepository, DeleteResult } from 'typeorm';
 import { User } from './users.entity';
 import { CreateUserDTO } from './dtos/create-user.dto';
-import { AddPetDTO } from './dtos/add-pet.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
+
+  async getAll(): Promise<User[]> {
+    return this.userRepository.find();
+  }
+
+  async getPets(id: number): Promise<any> {
+    // primary keys are unique so this should be fine.
+    return (await this.userRepository.findOne({ id })).pets;
+  }
 
   async create(dto: CreateUserDTO) {
     const user = new User();
