@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  Index,
+} from 'typeorm';
 import { Pet } from 'src/pets/pets.entity';
 
 @Entity()
@@ -10,6 +16,7 @@ export class User {
   name: string;
 
   @Column()
+  @Index({ unique: true })
   email: string;
 
   @OneToMany(
