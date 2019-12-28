@@ -6,7 +6,7 @@ import { CreatePetDTO } from './dtos/create-pet.dto';
 export class PetsController {
   constructor(private readonly petService: PetsService) {}
 
-  @Post()
+  @Post('create')
   addPet(@Body() pet: CreatePetDTO) {
     return this.petService.create(pet);
   }
