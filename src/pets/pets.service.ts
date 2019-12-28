@@ -12,8 +12,10 @@ export class PetsService {
     @InjectRepository(Pet) private readonly petsRepository: Repository<Pet>,
   ) {}
 
-  async getAll(): Promise<Pet[]> {
-    return this.petsRepository.find();
+  async getAll(ownerId: number): Promise<Pet[]> {
+    const user = new User();
+    user.id = ownerId;
+    return this.petsRepository.find({ user });
   }
 
   async create(dto: CreatePetDTO) {
