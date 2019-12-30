@@ -32,3 +32,5 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# .env // I haven't added this in to the .gitignore just to ease the pain for testers, but we would NEVER commit the env file.

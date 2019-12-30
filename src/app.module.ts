@@ -4,16 +4,18 @@ import { UsersModule } from './users/users.module';
 import { PetsModule } from './pets/pets.module';
 import { User } from './users/users.entity';
 import { Pet } from './pets/pets.entity';
+import { getDatabaseConnectionOptions } from './config/secrets';
 
+const dbConnectOptions = getDatabaseConnectionOptions();
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: dbConnectOptions.HOST,
       port: 5432,
-      username: 'postgres',
-      password: 'password',
-      database: 'postgres',
+      username: dbConnectOptions.USERNAME,
+      password: dbConnectOptions.PASSWORD,
+      database: dbConnectOptions.DATABASE,
       entities: [User, Pet],
       synchronize: true,
     }),
