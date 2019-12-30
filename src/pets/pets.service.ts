@@ -4,7 +4,7 @@ import { validate } from 'class-validator';
 import { Repository } from 'typeorm';
 import { Pet } from './pets.entity';
 import { CreatePetDTO } from './dtos/create-pet.dto';
-import { User } from 'src/users/users.entity';
+import { User } from '../users/users.entity';
 
 @Injectable()
 export class PetsService {

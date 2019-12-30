@@ -5,7 +5,7 @@ import {
   OneToMany,
   Index,
 } from 'typeorm';
-import { Pet } from 'src/pets/pets.entity';
+import { Pet } from '../pets/pets.entity';
 
 @Entity()
 export class User {
