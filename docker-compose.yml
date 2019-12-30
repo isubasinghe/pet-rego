@@ -4,12 +4,6 @@ services:
     image: isubasinghe/pet-rego
     depends_on:
       - postgres
-    environment:
-      HOST: postgres
-      USERNAME: postgres
-      PASSWORD: password
-      PORT: 5432
-      DATABASE: postgres
     ports:
       - '3000:3000'
 
