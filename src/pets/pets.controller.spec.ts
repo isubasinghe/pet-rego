@@ -32,14 +32,24 @@ describe('PetsController', () => {
     petsService = module.get<PetsService>(PetsService);
   });
 
-  describe('fetchPets', () => {
+  describe('fetchPets with valid id', () => {
     it('should return an array of pets', async () => {
       const result: Promise<Partial<Pet>[]> = new Promise(resolve =>
         resolve([{ id: 1, name: 'Spot', type: 'DOG' }]),
       );
       jest.spyOn(petsService, 'getAll').mockImplementation(() => result);
-      console.log(await petsController.fetchPets('1'));
       expect(await petsController.fetchPets('1')).toBe(await result);
+    });
+  });
+
+  describe('fetchPets with an invalid id', () => {
+    it('should throw an exception', async () => {
+      const result: Promise<Partial<Pet>[]> = new Promise(resolve =>
+        resolve([{ id: 1, name: 'Spot', type: 'DOG' }]),
+      );
+      jest.spyOn(petsService, 'getAll').mockImplementation(() => result);
+
+      expect(await petsController.fetchPets('a')).toBe(await result);
     });
   });
 });
