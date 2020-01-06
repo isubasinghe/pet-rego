@@ -13,7 +13,7 @@ export class PetsService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  async getAll(ownerId: number): Promise<Pet[]> {
+  async getAll(ownerId: number): Promise<Partial<Pet>[]> {
     if (isNaN(ownerId) || !isNumber(ownerId)) {
       throw new HttpException(
         'Invalid ownerId, ownerId must be of type number',
