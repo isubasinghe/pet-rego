@@ -1,12 +1,24 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  UsePipes,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { PetsService } from './pets.service';
 import { CreatePetDTO } from './dtos/create-pet.dto';
+import { validate } from 'class-validator';
+import { ValidationPipe } from '../shared/validation';
 
 @Controller('v1/pets')
 export class PetsController {
   constructor(private readonly petService: PetsService) {}
 
   @Post('create')
+  @UsePipes(new ValidationPipe())
   addPet(@Body() pet: CreatePetDTO) {
     return this.petService.create(pet);
   }
@@ -15,15 +27,11 @@ export class PetsController {
   // it is safer for us to obtain the id ourselves.
   // In order to minimise db queries, we could either
   // store the id in the JWT token (custom claims), or since email's are uniquely indexed,
-  // use the email from our JWT token.
+  // use the email field from our JWT token.
   @Get(':ownerId')
   fetchPets(@Param('ownerId') ownerId: string) {
     const parsedOwnerId = parseInt(ownerId);
-    if (isNaN(parsedOwnerId)) {
-      // TODO Handle a parse failure
-      return;
-    } else {
-      return this.petService.getAll(parsedOwnerId);
-    }
+
+    return this.petService.getAll(parsedOwnerId);
   }
 }
