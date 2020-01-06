@@ -11,7 +11,6 @@ import { plainToClass } from 'class-transformer';
 export class ValidationPipe implements PipeTransform {
   async transform(value: any, metadata: ArgumentMetadata) {
     const { metatype } = metadata;
-
     if (!metatype || !this.toValidate(metatype)) {
       return value;
     }

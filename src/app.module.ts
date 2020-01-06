@@ -18,6 +18,7 @@ const dbConnectOptions = getDatabaseConnectionOptions();
       database: dbConnectOptions.DATABASE,
       entities: [User, Pet],
       synchronize: true,
+      keepConnectionAlive: true,
     }),
     UsersModule,
     PetsModule,
