@@ -22,7 +22,7 @@ export class UsersService {
     return (await this.userRepository.findOne({ id })).pets;
   }
 
-  async create(dto: CreateUserDTO) {
+  async create(dto: CreateUserDTO): Promise<User> {
     const user = new User();
     user.email = dto.email;
     user.name = dto.name;

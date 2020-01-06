@@ -28,7 +28,7 @@ export class PetsService {
     return this.petsRepository.find({ user });
   }
 
-  async create(dto: CreatePetDTO) {
+  async create(dto: CreatePetDTO): Promise<Partial<Pet>> {
     const pet = new Pet();
 
     const user = await this.userRepository.findOne({ id: dto.ownerId });

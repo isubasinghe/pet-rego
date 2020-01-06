@@ -1,7 +1,6 @@
 import { Controller, Post, Body, Get, Param, UsePipes } from '@nestjs/common';
 import { PetsService } from './pets.service';
 import { CreatePetDTO } from './dtos/create-pet.dto';
-import { validate } from 'class-validator';
 import { ValidationPipe } from '../shared/validation';
 import { ApiCreatedResponse, ApiAcceptedResponse } from '@nestjs/swagger';
 import { Pet } from './pets.entity';
