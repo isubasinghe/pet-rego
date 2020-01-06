@@ -9,3 +9,10 @@ Full documentation of the REST API is available through the endpoint /docs provi
   Then modify the .env file provided to match your database config. 
   Then run yarn start
   
+Both of these will start the service on localhost:3000
+
+# Authentication
+This entire project was built around the assumption that authentication would be
+added via a provider like AWS cognito. The user create route could be called via a postConfirmation lambda.
+We obviously have to secure this route first, in order to ensure only our lambda function is able to call it.
+Note that when we add authentication we do not need the ownerId, we can retrieve it ourseleves via the JWT token.
