@@ -19,4 +19,4 @@ Note that when we add authentication we do not need the ownerId, we can retrieve
 
 # How to handle v2, supporting a local food supplier
 In order to support the local food supplier we can create a new route in /v2 called /foodinfo 
-The service for this could then use the PetRepository in order to determine the pet type(s) an owner has and map to the appropriate food item.
+The service for this could then use the PetRepository in order to determine the pet type(s) an owner has and map to the appropriate food item(s).
