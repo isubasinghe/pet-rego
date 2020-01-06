@@ -15,10 +15,20 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    await app.init();
 
+    // See issue https://github.com/visionmedia/supertest/issues/520
+    /*
+     * When supertest is used in an express application not yet bound to a port,
+     * it will try to automatically bound it to a random port,
+     * holding a reference to the net server internally.
+     * To gain control over that process,
+     * you may want to try manually listen on a port yourself, s
+     * o that you can close the connections manually. - @jonathansamines
+     */
+    await app.listen(4000);
+
+    // Lets clear the tables
     await getRepository(Pet).query('DELETE FROM pet');
-
     // id's are always greater than 0
     // we are essentially writing out some SQL here to delete all users.
     await getRepository(User)
@@ -29,11 +39,16 @@ describe('AppController (e2e)', () => {
       .execute();
   });
 
-  it('/v1/users/create (POST)', () => {
+  afterEach(() => {
+    app.close();
+  });
+
+  it('/v1/users/create (POST)', done => {
     return request(app.getHttpServer())
       .post('/v1/users/create')
       .send({ email: 'asd@aasda.com', name: 'asd' })
-      .expect(201);
+      .expect(201)
+      .end(done);
   });
 
   it('/v1/pets/create (POST)', done => {
