@@ -12,7 +12,6 @@ export class Pet {
     type => User,
     user => user.pets,
   )
-  @ApiProperty()
   user: User;
 
   @Column()

@@ -27,6 +27,5 @@ export class User {
     type => Pet,
     pet => pet.user,
   )
-  @ApiProperty()
   pets: Pet[];
 }
