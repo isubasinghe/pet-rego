@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsPet } from '../pet.validation';
 
 export class CreatePetDTO {
   @ApiProperty()
@@ -14,5 +15,6 @@ export class CreatePetDTO {
 
   @ApiProperty()
   @IsString()
+  @IsPet()
   type: string;
 }
